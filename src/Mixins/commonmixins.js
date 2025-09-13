@@ -9,12 +9,12 @@ export default {
     },
     //length of numbers
     lengthOfnumber(v) {
-      return v.length <= 10 || "Phone Number must be ten number";
+      return v.length <= 10 || "Phone Number must be ten digits";
     },
 
     //length of numbers
     lengthOfpnumber(v) {
-      return v.length >= 9 || "Phone Number must be ten number";
+      return v.length > 9 || "Phone Number must be ten digits";
     },
 
     //only letters and space
