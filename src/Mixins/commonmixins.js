@@ -7,6 +7,15 @@ export default {
     lengthOfCharacter(v) {
       return v.length >= 3 || "Name must be at least 3 characters";
     },
+    //length of numbers
+    lengthOfnumber(v) {
+      return v.length <= 10 || "Phone Number must be ten number";
+    },
+
+    //length of numbers
+    lengthOfpnumber(v) {
+      return v.length >= 9 || "Phone Number must be ten number";
+    },
 
     //only letters and space
     stringAndSpace(v) {

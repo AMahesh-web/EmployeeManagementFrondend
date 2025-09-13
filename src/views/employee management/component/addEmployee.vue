@@ -82,7 +82,12 @@
                           density="compact"
                           class="input-items"
                           v-model="form.phone"
-                          :rules="[required, onlyNumbers]"
+                          :rules="[
+                            required,
+                            onlyNumbers,
+                            lengthOfpnumber,
+                            lengthOfnumber,
+                          ]"
                         ></v-text-field>
                       </div>
                     </v-col>
