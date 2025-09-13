@@ -92,13 +92,13 @@
                 <!--Action Button -->
                 <div v-if="header.value === 'Action'" class="d-flex gap-2">
                   <v-btn icon @click="updateemp(props.item)" color="">
-                    <v-icon>mdi-pencil</v-icon>
+                    <v-icon color="#2196F3">mdi-pencil</v-icon>
                   </v-btn>
                   <v-btn icon @click="deleteEmp(props.item.id)">
-                    <v-icon>mdi-delete</v-icon>
+                    <v-icon color="#D50000">mdi-delete</v-icon>
                   </v-btn>
                   <v-btn icon @click="getReport(props.item.id)">
-                    <v-icon>mdi-file-pdf-box</v-icon>
+                    <v-icon color="#009688">mdi-file-pdf-box</v-icon>
                   </v-btn>
                 </div>
 
