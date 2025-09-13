@@ -35,6 +35,15 @@
               @click="$router.push('/employee')"
             >
             </v-list-item>
+            <!-- Report -->
+            <v-list-item
+              active-class="active-color"
+              prepend-icon="mdi mdi-note-outline"
+              title="Report"
+              value="report"
+              @click="$router.push('/report')"
+            >
+            </v-list-item>
           </v-list>
         </div>
       </div>

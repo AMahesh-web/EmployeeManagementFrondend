@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import employee from "@/views/employee management/component/Table.vue";
+import employee from "@/views/employee management/component/table.vue";
 export default {
   components: {
     employee,

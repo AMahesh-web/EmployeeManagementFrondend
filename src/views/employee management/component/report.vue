@@ -28,8 +28,8 @@
                 dense
                 hide-details
                 clearable
-                @click="uiStore.openAddItem"
-                ><span class="btnText">Add Employee</span></v-btn
+                @click="getReport()"
+                ><span class="btnText">Generate Report</span></v-btn
               >
             </div>
           </v-col>
@@ -89,18 +89,6 @@
                     {{ props.item.yearly_net_salary }}
                   </div>
                 </div>
-                <!--Action Button -->
-                <div v-if="header.value === 'Action'" class="d-flex gap-2">
-                  <v-btn icon @click="updateemp(props.item)" color="">
-                    <v-icon color="#2196F3">mdi-pencil</v-icon>
-                  </v-btn>
-                  <v-btn icon @click="deleteEmp(props.item.id)">
-                    <v-icon color="#D50000">mdi-delete</v-icon>
-                  </v-btn>
-                  <v-btn icon @click="getReport(props.item.id)">
-                    <v-icon color="#009688">mdi-file-pdf-box</v-icon>
-                  </v-btn>
-                </div>
 
                 &nbsp;&nbsp;&nbsp;
               </div>
@@ -110,50 +98,17 @@
       </v-container>
     </div>
   </div>
-  <div></div>
-  <!--Add employee form-->
-  <div>
-    <v-dialog
-      class="v-dialog1"
-      v-model="uiStore.addItem"
-      zIndex="1056"
-      persistent
-    >
-      <addEmployeeForm />
-    </v-dialog>
-  </div>
-
-  <!--Update Form-->
-  <div>
-    <v-dialog
-      class="v-dialog1"
-      v-model="uiStore.updateItem"
-      zIndex="1055"
-      persistent
-      ><updateEmployeeForm :updateFoem="updatevalue"
-    /></v-dialog>
-  </div>
 </template>
 <script>
-import addEmployeeForm from "@/views/employee management/component/addEmployee.vue";
-import updateEmployeeForm from "@/views/employee management/component/update.vue";
-
 //import pinia store
 import { useEmployeeStore } from "@/useEmployeeStore";
-import { uiStock } from "@/functionStock";
-
-//import sweet alert
-import Swal from "sweetalert2";
 
 //import jspdf
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
 export default {
-  components: {
-    addEmployeeForm,
-    updateEmployeeForm,
-  },
+  components: {},
 
   data() {
     return {
@@ -167,17 +122,11 @@ export default {
         { title: "Yearly Bonus", value: "yearly_increasing_bonus" },
         { title: "Monthly Net Salary", value: "monthly_net_salary" },
         { title: "Yearly Net Salary", value: "yearly_net_salary" },
-        { title: "Action", value: "Action" },
       ],
       search: "",
-      employees: [],
-
-      //update form
-      updatevalue: [],
 
       //define pinia
       store: useEmployeeStore(),
-      uiStore: uiStock(),
     };
   },
   mounted() {
@@ -196,64 +145,37 @@ export default {
   },
 
   methods: {
-    //update employee
-    updateemp(value) {
-      this.uiStore.openEditForm();
-      this.updatevalue = { ...value };
-    },
-
-    //delete emp details
-    async deleteEmp(id) {
-      const result = await Swal.fire({
-        title: "Do you want to Delete the record?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonText: "Yes,Do ",
-        cancelButtonText: "No, keep it as it is.",
-        confirmButtonColor: "#ff0900",
-        cancelButtonColor: "#004DA7",
-        color: "#000000",
-      });
-      if (result.isConfirmed) {
-        await this.store.deletEmp(id);
-        Swal.fire("success", "The Employee has been deleted", "success");
-      }
-    },
-
     //report Generate
-    getReport(data) {
-      //get id related data
-      const emp = this.store.parentStockData.find((e) => e.id === data);
-      if (!emp) return;
-
+    getReport() {
       const doc = new jsPDF();
 
-      //set the heading
+      // Title
       doc.setFontSize(18);
       doc.text("Mahesh & sons Pvt Ltd", 105, 20, { align: "center" });
-      doc.setFontSize(14);
+      doc.setFontSize(12);
       doc.text("Employee Payslip", 105, 30, { align: "center" });
-      doc.line(20, 35, 190, 35);
+      doc.line(10, 35, 200, 35);
 
+      // Extract headers (exclude Action)
+      const headers = this.headers
+        .filter((h) => h.value !== "Action")
+        .map((h) => h.title);
+
+      // Extract rows
+      const rows = this.store.parentStockData.map((emp) =>
+        this.headers
+          .filter((h) => h.value !== "Action")
+          .map((h) => emp[h.value])
+      );
+
+      // Generate table
       autoTable(doc, {
-        startY: 45,
-        theme: "grid",
-        head: [["Field", "Value"]],
-        body: [
-          ["Name", emp.name],
-          ["Email", emp.email],
-          ["Phone", emp.phone],
-          ["Designation", emp.designation],
-          ["Monthly Salary", emp.monthly_salary_package],
-          ["Monthly Tax", emp.monthly_tax_value],
-          ["Yearly Bonus", emp.yearly_increasing_bonus],
-          ["Monthly Net Salary", emp.monthly_net_salary],
-          ["Yearly Net Salary", emp.yearly_net_salary],
-        ],
-        styles: { fontSize: 11, cellPadding: 4 },
-        headStyles: { fillColor: [63, 81, 181] },
+        head: [headers],
+        body: rows,
+        startY: 40,
+        styles: { fontSize: 8 },
+        headStyles: { fillColor: [3, 169, 244] }, // blue header
       });
-      //set the footer and signature
       const pageHeight = doc.internal.pageSize.height;
       doc.setFontSize(10);
       doc.text("This is a system generated payslip.", 20, pageHeight - 20);
@@ -262,7 +184,7 @@ export default {
         120,
         pageHeight - 20
       );
-      // Save PDF with employee name
+
       //open separate tab
       window.open(doc.output("bloburl"), "_blank");
     },
