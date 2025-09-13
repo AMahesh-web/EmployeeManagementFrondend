@@ -1,0 +1,206 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  // add new item form
+  .v-dialog1 {
+    width: 50%;
+    max-height: 700px;
+
+    /* Styles for phones */
+    @media (max-width: 575.98px) {
+      width: 90%;
+      max-height: 100vh;
+    }
+  }
+}
+
+.stock-main {
+  //action button- width
+  .button-width {
+    width: 90%;
+  }
+  //table bod
+  .stock-sub {
+    width: 100%;
+    height: auto;
+    top: 49px;
+    left: 208px;
+    border: 1px solid #0000001a;
+    background-color: #f4eded;
+    margin-bottom: 20px;
+  }
+  // heading
+  .stock-head {
+    margin: 40px 0;
+  }
+  //heading title in table file
+  .head-title {
+    color: #333;
+    text-align: center;
+    font-family: "Inter";
+    font-weight: 700;
+    line-height: 100%;
+  }
+  //add new item button
+  .add-item {
+    background-color: #3b71ca;
+    border-radius: 5px;
+    margin: 0 16px 10px 0;
+    .btnText {
+      font-family: "Lato";
+      color: #ffffff;
+      font-weight: 900;
+      text-transform: capitalize;
+    }
+  }
+  //table content
+  table {
+    thead {
+      tr {
+        th {
+          .v-data-table-header__content {
+            color: #000000;
+            font-family: "Inter";
+            font-weight: 700;
+            font-size: 0.9rem;
+          }
+        }
+        th:last-child {
+          .v-data-table-header__content {
+            justify-content: center;
+            width: 70%;
+          }
+        }
+      }
+    }
+  }
+  #data-app {
+    #data-card {
+      .table-values {
+        font-weight: 500;
+        color: black;
+      }
+    }
+  }
+}
+//-------------------------------------------------------------------------
+//add item form
+.addFormComponant {
+  .addFormSheet {
+    width: auto;
+    color: #ffffff;
+    /*add item form division*/
+    .sub-division {
+      width: 100%;
+      height: 10vh;
+      background-color: #3b71ca;
+      position: relative;
+
+      .close-button {
+        background-color: #000000;
+        height: 35px;
+        width: 40px;
+        border-radius: 4px;
+        .close-icon {
+          color: #ffffff;
+        }
+      }
+      .sub-title {
+        position: relative;
+        top: 30px;
+        left: 20px;
+
+        .headdingTitle {
+          color: #ffffff;
+          font-weight: 700;
+          font-family: Inter;
+          font-size: 1.25rem;
+          line-height: 100%;
+          letter-spacing: 0%;
+        }
+      }
+    }
+    //form card
+    .item-form {
+      .item-input-form {
+        .form-card {
+          background-color: #fcf6f6;
+          width: auto;
+          height: 80vh;
+          border-radius: 4px;
+          margin: 10px;
+          overflow-x: hidden;
+          overflow-y: scroll;
+
+          /* Styles for phones */
+          @media (max-width: 575.98px) {
+            height: 70vh;
+          }
+          //img-upload
+          .img-Upload {
+            margin-left: 10px;
+            /* Styles for phones */
+            @media (max-width: 575.98px) {
+              margin-left: 0px;
+              width: 60vw;
+            }
+          }
+
+          .form-input {
+            height: 34px;
+            .input-items {
+              width: 40vw;
+              font-family: "Inter";
+              /* Styles for phones */
+              @media (max-width: 575.98px) {
+                width: 60vw;
+              }
+            }
+          }
+          .formLabel {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #010101;
+            padding-bottom: 4px;
+          }
+          .subButton {
+            background-color: #004da7;
+            border-radius: 4px;
+            .text {
+              color: #ffffff;
+              font-family: "inter";
+              font-weight: 700;
+              font-size: 1rem;
+              text-transform: capitalize;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+//dashboard
+.dashBord {
+  .dashboardCard {
+    .dasbordTitle {
+      font-size: 1.8rem;
+      font-weight: 700;
+      font-family: Inter;
+      text-transform: capitalize;
+    }
+    .cnavas {
+      width: 100% !important;
+      height: 400px !important;
+      background-color: #bbdefb;
+    }
+  }
+  .label {
+    background-color: #e3f2fd;
+    .label-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: Inter;
+      text-transform: capitalize;
+    }
+  }
+}
